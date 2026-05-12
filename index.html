@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de CAC | Mari Manfredinny</title>
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1348713502744731');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1348713502744731&ev=PageView&noscript=1"/></noscript>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --areia:#F5F0EB;
+  --areia-escura:#EAE2D8;
+  --vinho:#6B2735;
+  --verde:#2A3D35;
+  --ouro:#A8895A;
+  --texto:#1E1A16;
+  --suave:#6B5E52;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--areia);color:var(--texto);min-height:100vh}
+.topo{background:var(--verde);padding:1.25rem 2rem;text-align:center}
+.topo-nome{font-family:'Cormorant Garamond',serif;font-size:0.95rem;color:#9DB8AA;letter-spacing:0.2em;text-transform:uppercase}
+.container{max-width:660px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+h1{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:500;line-height:1.2;color:var(--verde);margin-bottom:0.75rem}
+.sub{font-size:0.95rem;color:var(--suave);line-height:1.7;margin-bottom:2.5rem;font-weight:300}
+.grupo{margin-bottom:1.75rem}
+label{display:block;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--suave);margin-bottom:0.5rem}
+.campo-wrap{position:relative;border-bottom:1.5px solid #C4B5A0;transition:border-color 0.2s}
+.campo-wrap:focus-within{border-color:var(--vinho)}
+.prefixo{position:absolute;left:0;bottom:0.85rem;font-size:1.05rem;color:var(--suave);pointer-events:none}
+input[type=number]{width:100%;padding:0.85rem 0;padding-left:1.6rem;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:1.05rem;color:var(--texto);outline:none;-moz-appearance:textfield;appearance:textfield}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+select{width:100%;padding:0.85rem 0;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:1.05rem;color:var(--texto);outline:none;cursor:pointer;appearance:none;-webkit-appearance:none}
+.select-wrap{position:relative;border-bottom:1.5px solid #C4B5A0;transition:border-color 0.2s}
+.select-wrap:focus-within{border-color:var(--vinho)}
+.select-seta{position:absolute;right:0;bottom:0.9rem;font-size:0.75rem;color:var(--suave);pointer-events:none}
+.btn-calcular{width:100%;padding:1.1rem;background:var(--vinho);color:white;border:none;font-family:'DM Sans',sans-serif;font-size:0.95rem;letter-spacing:0.06em;cursor:pointer;transition:opacity 0.2s;margin-top:0.5rem}
+.btn-calcular:hover{opacity:0.88}
+.aviso{font-size:0.72rem;color:var(--suave);text-align:center;margin-top:0.75rem;font-weight:300}
+.divisor{height:1px;background:#D4C4B4;margin:2.5rem 0}
+.resultados{display:none}
+.resultados.ativo{display:block}
+h2{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:500;color:var(--verde);margin-bottom:1.5rem}
+
+/* Cards principais */
+.cards-top{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.card{padding:1.25rem 1.25rem 1rem;border:1px solid #D4C4B4}
+.card.destaque{background:var(--verde);border-color:var(--verde)}
+.card-rotulo{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--suave);margin-bottom:0.5rem}
+.card.destaque .card-rotulo{color:#7DAA90}
+.card-valor{font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:500;color:var(--texto)}
+.card.destaque .card-valor{color:#F0EBE3}
+.card-desc{font-size:0.75rem;color:var(--suave);margin-top:0.2rem}
+.card.destaque .card-desc{color:#7DAA90}
+
+/* Status badge */
+.status-box{padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:1rem}
+.status-box.saudavel{background:#EAF3DE;border-left:3px solid #639922}
+.status-box.atencao{background:#FAEEDA;border-left:3px solid #BA7517}
+.status-box.critico{background:#FCEBEB;border-left:3px solid #A32D2D}
+.status-icone{font-size:1.5rem;flex-shrink:0;line-height:1.2}
+.status-texto h3{font-size:0.85rem;font-weight:500;margin-bottom:0.25rem}
+.status-box.saudavel .status-texto h3{color:#3B6D11}
+.status-box.atencao .status-texto h3{color:#854F0B}
+.status-box.critico .status-texto h3{color:#A32D2D}
+.status-texto p{font-size:0.82rem;line-height:1.6;color:var(--suave)}
+
+/* Comparativo visual */
+.comparativo{background:white;border:1px solid #D4C4B4;padding:1.5rem;margin-bottom:1.5rem}
+.comp-titulo{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--suave);margin-bottom:1.25rem}
+.barra-item{margin-bottom:1rem}
+.barra-label{display:flex;justify-content:space-between;font-size:0.8rem;color:var(--suave);margin-bottom:0.35rem}
+.barra-label strong{color:var(--texto);font-weight:500}
+.barra-trilha{height:8px;background:#EAE2D8;border-radius:4px;overflow:hidden}
+.barra-fill{height:100%;border-radius:4px;transition:width 0.8s ease}
+.barra-fill.seu{background:var(--vinho)}
+.barra-fill.bench{background:var(--verde);opacity:0.6}
+
+/* Potencial */
+.potencial-box{background:var(--areia-escura);border-left:3px solid var(--ouro);padding:1.25rem 1.5rem;margin-bottom:1.5rem}
+.potencial-box p{font-size:0.92rem;line-height:1.75;color:var(--texto)}
+.potencial-box strong{color:var(--verde)}
+
+.btn-cta{width:100%;padding:1.2rem;background:var(--ouro);color:var(--texto);border:none;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:500;letter-spacing:0.04em;cursor:pointer;transition:opacity 0.2s}
+.btn-cta:hover{opacity:0.88}
+
+/* Modal */
+.overlay{display:none;position:fixed;inset:0;background:rgba(30,26,22,0.82);z-index:1000;align-items:center;justify-content:center;padding:1.5rem}
+.overlay.ativo{display:flex}
+.modal{background:var(--areia);max-width:440px;width:100%;padding:2.5rem;position:relative}
+.fechar{position:absolute;top:1rem;right:1.25rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--suave);line-height:1}
+.badge{display:inline-block;background:var(--vinho);color:white;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.3rem 0.75rem;margin-bottom:1rem}
+.modal h3{font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:500;color:var(--verde);line-height:1.2;margin-bottom:1rem}
+.modal p{font-size:0.88rem;color:var(--suave);line-height:1.7;margin-bottom:1.5rem}
+.btn-wpp{display:block;width:100%;padding:1.1rem;background:#25D366;color:white;border:none;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:500;cursor:pointer;text-decoration:none;text-align:center;transition:opacity 0.2s}
+.btn-wpp:hover{opacity:0.9}
+.modal-nota{font-size:0.72rem;color:var(--suave);text-align:center;margin-top:0.75rem}
+
+@media(max-width:480px){
+  h1{font-size:1.8rem}
+  .cards-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <p class="topo-nome">Mari Manfredinny</p>
+</header>
+
+<div class="container">
+  <h1>O que o seu investimento em tráfego está gerando, de verdade?</h1>
+  <p class="sub">Calcule o seu Custo de Aquisição de Cliente e compare com o benchmark saudável para o seu segmento.</p>
+
+  <div class="grupo">
+    <label>Investimento mensal em tráfego pago</label>
+    <div class="campo-wrap">
+      <span class="prefixo">R$</span>
+      <input type="number" id="inv" placeholder="0" min="0">
+    </div>
+  </div>
+
+  <div class="grupo">
+    <label>Clientes fechados por mês (média)</label>
+    <div class="campo-wrap">
+      <span class="prefixo" style="font-size:0.85rem;color:var(--suave)"></span>
+      <input type="number" id="clientes" placeholder="0" min="1" style="padding-left:0">
+    </div>
+  </div>
+
+  <div class="grupo">
+    <label>Segmento do seu negócio</label>
+    <div class="select-wrap">
+      <select id="segmento">
+        <option value="" disabled selected>Selecione</option>
+        <option value="b2b">Serviços B2B</option>
+        <option value="saude">Saúde e Estética</option>
+        <option value="imoveis">Imóveis</option>
+        <option value="educacao">Educação</option>
+        <option value="ecommerce">E-commerce / Produto físico</option>
+        <option value="infoproduto">Infoprodutos / Digital</option>
+        <option value="outro">Outro</option>
+      </select>
+      <span class="select-seta">&#9660;</span>
+    </div>
+  </div>
+
+  <button class="btn-calcular" onclick="calcular()">Calcular meu CAC</button>
+  <p class="aviso">Os benchmarks são baseados em médias de mercado. Cada negócio tem suas próprias variáveis.</p>
+
+  <div class="resultados" id="resultados">
+    <div class="divisor"></div>
+    <h2>Diagnóstico do seu CAC</h2>
+
+    <div class="cards-top">
+      <div class="card destaque">
+        <p class="card-rotulo">Seu CAC atual</p>
+        <p class="card-valor" id="v-cac">R$ 0</p>
+        <p class="card-desc">Por cliente adquirido</p>
+      </div>
+      <div class="card">
+        <p class="card-rotulo">Benchmark saudável</p>
+        <p class="card-valor" id="v-bench">R$ 0</p>
+        <p class="card-desc" id="d-bench">Para o seu segmento</p>
+      </div>
+    </div>
+
+    <div class="status-box" id="status-box">
+      <div class="status-icone" id="status-icone"></div>
+      <div class="status-texto">
+        <h3 id="status-titulo"></h3>
+        <p id="status-desc"></p>
+      </div>
+    </div>
+
+    <div class="comparativo">
+      <p class="comp-titulo">Comparativo visual</p>
+      <div class="barra-item">
+        <div class="barra-label">
+          <span>Benchmark saudável</span>
+          <strong id="label-bench">R$ 0</strong>
+        </div>
+        <div class="barra-trilha"><div class="barra-fill bench" id="barra-bench" style="width:0%"></div></div>
+      </div>
+      <div class="barra-item">
+        <div class="barra-label">
+          <span>Seu CAC atual</span>
+          <strong id="label-cac">R$ 0</strong>
+        </div>
+        <div class="barra-trilha"><div class="barra-fill seu" id="barra-seu" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="potencial-box">
+      <p id="texto-potencial"></p>
+    </div>
+
+    <button class="btn-cta" onclick="abrirModal()">Quero entender como reduzir meu CAC</button>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="fecharSeClicouFora(event)">
+  <div class="modal">
+    <button class="fechar" onclick="fecharModal()">&#215;</button>
+    <span class="badge">Diagnóstico gratuito</span>
+    <h3>Seu investimento pode render mais do que está rendendo agora</h3>
+    <p>Em 20 minutos você entende onde o seu CAC está sendo impactado e o que pode ser ajustado para o mesmo budget gerar mais clientes.</p>
+    <a class="btn-wpp" id="link-wpp" href="#" target="_blank" rel="noopener" onclick="rastrearCTA()">Falar com a Mari no WhatsApp</a>
+    <p class="modal-nota">Reunião de 20 minutos. Sem compromisso.</p>
+  </div>
+</div>
+
+<script>
+// *** SUBSTITUA pelo seu número com DDI+DDD, sem espaços ou traços ***
+// Exemplo: '5524999990000'
+var NUM = 'SEU_NUMERO';
+var MSG = encodeURIComponent('Oi, Mari! Calculei meu CAC aqui e quero entender como melhorar.');
+document.getElementById('link-wpp').href = 'https://wa.me/' + NUM + '?text=' + MSG;
+
+var benchmarks = {
+  b2b:        {label:'Serviços B2B',      min:200,  max:600,  ideal:380},
+  saude:      {label:'Saúde e Estética',  min:80,   max:220,  ideal:140},
+  imoveis:    {label:'Imóveis',           min:800,  max:2000, ideal:1300},
+  educacao:   {label:'Educação',          min:150,  max:400,  ideal:260},
+  ecommerce:  {label:'E-commerce',        min:50,   max:160,  ideal:100},
+  infoproduto:{label:'Infoprodutos',      min:25,   max:100,  ideal:60},
+  outro:      {label:'Outro',             min:100,  max:320,  ideal:200}
+};
+
+function brl(v){return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0})}
+
+function calcular(){
+  var inv = parseFloat(document.getElementById('inv').value)||0;
+  var cli = parseFloat(document.getElementById('clientes').value)||0;
+  var seg = document.getElementById('segmento').value;
+
+  if(inv<=0||cli<=0){alert('Preencha o investimento e o número de clientes.');return;}
+  if(!seg){alert('Selecione o segmento do seu negócio.');return;}
+
+  var cac = inv / cli;
+  var b = benchmarks[seg];
+  var potencial = Math.round(inv / b.ideal);
+
+  document.getElementById('v-cac').textContent = brl(cac);
+  document.getElementById('v-bench').textContent = brl(b.min) + ' – ' + brl(b.max);
+  document.getElementById('d-bench').textContent = b.label;
+  document.getElementById('label-bench').textContent = brl(b.ideal);
+  document.getElementById('label-cac').textContent = brl(cac);
+
+  // Barras visuais
+  var maiorValor = Math.max(cac, b.ideal) * 1.2;
+  document.getElementById('barra-bench').style.width = Math.min(100, (b.ideal / maiorValor) * 100) + '%';
+  document.getElementById('barra-seu').style.width = Math.min(100, (cac / maiorValor) * 100) + '%';
+
+  // Status
+  var box = document.getElementById('status-box');
+  var icone = document.getElementById('status-icone');
+  var titulo = document.getElementById('status-titulo');
+  var desc = document.getElementById('status-desc');
+
+  box.className = 'status-box';
+  if(cac <= b.max){
+    box.classList.add('saudavel');
+    icone.textContent = '✓';
+    titulo.textContent = 'CAC saudável para o seu segmento';
+    desc.textContent = 'Seu custo de aquisição está dentro da faixa de referência para ' + b.label + '. Existe espaço para escalar com eficiência.';
+  } else if(cac <= b.max * 2){
+    box.classList.add('atencao');
+    icone.textContent = '!';
+    titulo.textContent = 'CAC acima da referência: atenção';
+    desc.textContent = 'Seu custo de aquisição está acima do benchmark saudável para ' + b.label + '. Vale revisar funil, segmentação e taxa de conversão.';
+  } else {
+    box.classList.add('critico');
+    icone.textContent = '▲';
+    titulo.textContent = 'CAC crítico: o investimento está trabalhando contra você';
+    desc.textContent = 'Com esse CAC, cada cliente adquirido compromete uma fatia relevante da sua margem. Isso precisa de revisão estratégica urgente.';
+  }
+
+  // Texto do potencial
+  var dif = potencial - cli;
+  var textoPot = 'Com o mesmo investimento de <strong>' + brl(inv) + '/mês</strong>, um CAC calibrado para o benchmark do segmento colocaria <strong>' + potencial + ' clientes/mês</strong> dentro do negócio.';
+  if(dif > 0){
+    textoPot += ' Isso é <strong>' + dif + ' cliente' + (dif>1?'s':'') + ' a mais</strong> por mês sem aumentar um centavo de budget.';
+  }
+  document.getElementById('texto-potencial').innerHTML = textoPot;
+
+  var r = document.getElementById('resultados');
+  r.classList.add('ativo');
+  setTimeout(function(){r.scrollIntoView({behavior:'smooth',block:'start'})},100);
+
+  if(typeof fbq!=='undefined'){fbq('track','Lead',{value:inv,currency:'BRL'});}
+}
+
+function abrirModal(){document.getElementById('overlay').classList.add('ativo');}
+function fecharModal(){document.getElementById('overlay').classList.remove('ativo');}
+function fecharSeClicouFora(e){if(e.target===document.getElementById('overlay'))fecharModal();}
+function rastrearCTA(){if(typeof fbq!=='undefined'){fbq('track','Contact');}}
+</script>
+</body>
+</html>
