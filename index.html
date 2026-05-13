@@ -18,101 +18,489 @@ fbq('track','PageView');
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1348713502744731&ev=PageView&noscript=1"/></noscript>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --areia:#F5F0EB;
-  --areia-escura:#EAE2D8;
-  --vinho:#6B2735;
-  --verde:#2A3D35;
+  --espresso:#1E1A16;
+  --espresso-soft:#2C2620;
+  --branco-quente:#FDFAF6;
+  --creme:#F5F0E8;
+  --areia:#E3D5BE;
+  --taupe:#C4B49A;
   --ouro:#A8895A;
-  --texto:#1E1A16;
-  --suave:#6B5E52;
+  --ouro-claro:#C4A46E;
+  --sage:#8A9A84;
+  --blush:#D9B8A8;
 }
-body{font-family:'DM Sans',sans-serif;background:var(--areia);color:var(--texto);min-height:100vh}
-.topo{background:var(--verde);padding:1.25rem 2rem;text-align:center}
-.topo-nome{font-family:'Cormorant Garamond',serif;font-size:0.95rem;color:#9DB8AA;letter-spacing:0.2em;text-transform:uppercase}
-.container{max-width:660px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
-h1{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:500;line-height:1.2;color:var(--verde);margin-bottom:0.75rem}
-.sub{font-size:0.95rem;color:var(--suave);line-height:1.7;margin-bottom:2.5rem;font-weight:300}
-.grupo{margin-bottom:1.75rem}
-label{display:block;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--suave);margin-bottom:0.5rem}
-.campo-wrap{position:relative;border-bottom:1.5px solid #C4B5A0;transition:border-color 0.2s}
-.campo-wrap:focus-within{border-color:var(--vinho)}
-.prefixo{position:absolute;left:0;bottom:0.85rem;font-size:1.05rem;color:var(--suave);pointer-events:none}
-input[type=number]{width:100%;padding:0.85rem 0;padding-left:1.6rem;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:1.05rem;color:var(--texto);outline:none;-moz-appearance:textfield;appearance:textfield}
-input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
-select{width:100%;padding:0.85rem 0;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:1.05rem;color:var(--texto);outline:none;cursor:pointer;appearance:none;-webkit-appearance:none}
-.select-wrap{position:relative;border-bottom:1.5px solid #C4B5A0;transition:border-color 0.2s}
-.select-wrap:focus-within{border-color:var(--vinho)}
-.select-seta{position:absolute;right:0;bottom:0.9rem;font-size:0.75rem;color:var(--suave);pointer-events:none}
-.btn-calcular{width:100%;padding:1.1rem;background:var(--vinho);color:white;border:none;font-family:'DM Sans',sans-serif;font-size:0.95rem;letter-spacing:0.06em;cursor:pointer;transition:opacity 0.2s;margin-top:0.5rem}
-.btn-calcular:hover{opacity:0.88}
-.aviso{font-size:0.72rem;color:var(--suave);text-align:center;margin-top:0.75rem;font-weight:300}
-.divisor{height:1px;background:#D4C4B4;margin:2.5rem 0}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:var(--espresso);
+  color:var(--branco-quente);
+  min-height:100vh;
+  font-weight:300;
+}
+
+/* Header */
+.topo{
+  padding:2rem 2rem 1.5rem;
+  text-align:center;
+  border-bottom:1px solid rgba(168,137,90,0.18);
+}
+.topo-nome{
+  font-family:'Lora',serif;
+  font-style:italic;
+  font-size:1.5rem;
+  color:var(--ouro-claro);
+  letter-spacing:0.02em;
+  line-height:1.2;
+}
+.topo-divisor{
+  width:40px;
+  height:1px;
+  background:rgba(168,137,90,0.4);
+  margin:0.85rem auto;
+}
+.topo-cargo{
+  font-size:0.6rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--ouro);
+  font-weight:300;
+}
+
+/* Layout */
+.container{max-width:640px;margin:0 auto;padding:3.5rem 1.5rem 5rem}
+
+/* Headline */
+h1{
+  font-family:'Lora',serif;
+  font-style:italic;
+  font-size:2.4rem;
+  font-weight:400;
+  line-height:1.25;
+  color:var(--branco-quente);
+  margin-bottom:1.1rem;
+}
+h1 em{color:var(--ouro-claro);font-style:italic}
+
+.sub{
+  font-size:0.88rem;
+  color:var(--taupe);
+  line-height:1.85;
+  margin-bottom:3rem;
+  font-weight:300;
+}
+
+/* Inputs */
+.grupo{margin-bottom:2.25rem}
+
+label{
+  display:block;
+  font-size:0.6rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--ouro);
+  margin-bottom:0.75rem;
+  font-weight:300;
+}
+
+.campo-wrap{
+  position:relative;
+  border-bottom:1px solid rgba(196,180,154,0.3);
+  transition:border-color 0.25s;
+}
+.campo-wrap:focus-within{border-color:var(--ouro-claro)}
+
+.prefixo{
+  position:absolute;
+  left:0;
+  bottom:0.85rem;
+  font-size:0.95rem;
+  color:var(--taupe);
+  pointer-events:none;
+  font-weight:300;
+}
+
+input[type=number]{
+  width:100%;
+  padding:0.85rem 0;
+  padding-left:1.5rem;
+  border:none;
+  background:transparent;
+  font-family:'Poppins',sans-serif;
+  font-size:1rem;
+  color:var(--branco-quente);
+  outline:none;
+  -moz-appearance:textfield;
+  appearance:textfield;
+  font-weight:300;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+input[type=number]::placeholder{color:rgba(196,180,154,0.3)}
+
+.select-wrap{
+  position:relative;
+  border-bottom:1px solid rgba(196,180,154,0.3);
+  transition:border-color 0.25s;
+}
+.select-wrap:focus-within{border-color:var(--ouro-claro)}
+
+select{
+  width:100%;
+  padding:0.85rem 0;
+  border:none;
+  background:transparent;
+  font-family:'Poppins',sans-serif;
+  font-size:1rem;
+  color:var(--branco-quente);
+  outline:none;
+  cursor:pointer;
+  appearance:none;
+  -webkit-appearance:none;
+  font-weight:300;
+}
+select option{background:var(--espresso-soft);color:var(--branco-quente)}
+
+.select-seta{
+  position:absolute;
+  right:0;
+  bottom:0.9rem;
+  font-size:0.6rem;
+  color:var(--taupe);
+  pointer-events:none;
+}
+
+/* Botão calcular */
+.btn-calcular{
+  width:100%;
+  padding:1.15rem;
+  background:var(--ouro);
+  color:var(--espresso);
+  border:none;
+  font-family:'Poppins',sans-serif;
+  font-size:0.65rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:background 0.25s;
+  margin-top:0.5rem;
+  border-radius:2px;
+  font-weight:400;
+}
+.btn-calcular:hover{background:var(--ouro-claro)}
+
+.aviso{
+  font-size:0.68rem;
+  color:rgba(196,180,154,0.45);
+  text-align:center;
+  margin-top:1rem;
+  font-weight:300;
+  letter-spacing:0.03em;
+}
+
+/* Divisor */
+.divisor{
+  width:60px;
+  height:1px;
+  background:rgba(168,137,90,0.4);
+  margin:3rem 0;
+}
+
+/* Resultados */
 .resultados{display:none}
 .resultados.ativo{display:block}
-h2{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:500;color:var(--verde);margin-bottom:1.5rem}
 
-/* Cards principais */
-.cards-top{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
-.card{padding:1.25rem 1.25rem 1rem;border:1px solid #D4C4B4}
-.card.destaque{background:var(--verde);border-color:var(--verde)}
-.card-rotulo{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--suave);margin-bottom:0.5rem}
-.card.destaque .card-rotulo{color:#7DAA90}
-.card-valor{font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:500;color:var(--texto)}
-.card.destaque .card-valor{color:#F0EBE3}
-.card-desc{font-size:0.75rem;color:var(--suave);margin-top:0.2rem}
-.card.destaque .card-desc{color:#7DAA90}
+h2{
+  font-family:'Lora',serif;
+  font-style:italic;
+  font-size:1.75rem;
+  font-weight:400;
+  color:var(--branco-quente);
+  margin-bottom:0.45rem;
+}
+.h2-label{
+  font-size:0.6rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--ouro);
+  display:block;
+  margin-bottom:2rem;
+  font-weight:300;
+}
 
-/* Status badge */
-.status-box{padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:1rem}
-.status-box.saudavel{background:#EAF3DE;border-left:3px solid #639922}
-.status-box.atencao{background:#FAEEDA;border-left:3px solid #BA7517}
-.status-box.critico{background:#FCEBEB;border-left:3px solid #A32D2D}
-.status-icone{font-size:1.5rem;flex-shrink:0;line-height:1.2}
-.status-texto h3{font-size:0.85rem;font-weight:500;margin-bottom:0.25rem}
-.status-box.saudavel .status-texto h3{color:#3B6D11}
-.status-box.atencao .status-texto h3{color:#854F0B}
-.status-box.critico .status-texto h3{color:#A32D2D}
-.status-texto p{font-size:0.82rem;line-height:1.6;color:var(--suave)}
+/* Cards — vidro dourado */
+.cards-top{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:2px}
 
-/* Comparativo visual */
-.comparativo{background:white;border:1px solid #D4C4B4;padding:1.5rem;margin-bottom:1.5rem}
-.comp-titulo{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--suave);margin-bottom:1.25rem}
-.barra-item{margin-bottom:1rem}
-.barra-label{display:flex;justify-content:space-between;font-size:0.8rem;color:var(--suave);margin-bottom:0.35rem}
-.barra-label strong{color:var(--texto);font-weight:500}
-.barra-trilha{height:8px;background:#EAE2D8;border-radius:4px;overflow:hidden}
-.barra-fill{height:100%;border-radius:4px;transition:width 0.8s ease}
-.barra-fill.seu{background:var(--vinho)}
-.barra-fill.bench{background:var(--verde);opacity:0.6}
+.card{
+  padding:1.5rem 1.25rem 1.25rem;
+  background:rgba(168,137,90,0.08);
+  border:1px solid rgba(168,137,90,0.22);
+  backdrop-filter:blur(8px);
+  border-radius:2px;
+}
+.card.destaque{
+  background:rgba(168,137,90,0.13);
+  border-color:rgba(168,137,90,0.38);
+}
+
+.card-rotulo{
+  font-size:0.6rem;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--ouro);
+  margin-bottom:0.75rem;
+  font-weight:300;
+}
+.card-valor{
+  font-family:'Lora',serif;
+  font-style:italic;
+  font-size:1.75rem;
+  font-weight:400;
+  color:var(--branco-quente);
+  line-height:1;
+}
+.card.destaque .card-valor{color:var(--ouro-claro)}
+.card-desc{
+  font-size:0.72rem;
+  color:var(--taupe);
+  margin-top:0.4rem;
+  font-weight:300;
+}
+
+/* Status box */
+.status-box{
+  padding:1.5rem;
+  margin-top:2px;
+  margin-bottom:2px;
+  display:flex;
+  align-items:flex-start;
+  gap:1.25rem;
+  border-radius:2px;
+  backdrop-filter:blur(8px);
+}
+.status-box.saudavel{
+  background:rgba(138,154,132,0.1);
+  border:1px solid rgba(138,154,132,0.28);
+}
+.status-box.atencao{
+  background:rgba(196,164,110,0.08);
+  border:1px solid rgba(196,164,110,0.28);
+}
+.status-box.critico{
+  background:rgba(217,184,168,0.07);
+  border:1px solid rgba(217,184,168,0.28);
+}
+
+.status-icone{
+  flex-shrink:0;
+  width:1.6rem;
+  height:1.6rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  font-size:0.72rem;
+  font-family:'Poppins',sans-serif;
+  font-weight:300;
+  border:1px solid rgba(168,137,90,0.4);
+  color:var(--ouro);
+}
+.status-box.saudavel .status-icone{color:var(--sage);border-color:rgba(138,154,132,0.45)}
+.status-box.critico .status-icone{color:var(--blush);border-color:rgba(217,184,168,0.38)}
+
+.status-texto h3{
+  font-family:'Lora',serif;
+  font-weight:400;
+  font-size:0.95rem;
+  margin-bottom:0.35rem;
+  color:var(--branco-quente);
+}
+.status-texto p{
+  font-size:0.82rem;
+  line-height:1.75;
+  color:var(--taupe);
+  font-weight:300;
+}
+
+/* Comparativo visual — vidro claro */
+.comparativo{
+  background:rgba(253,250,246,0.04);
+  border:1px solid rgba(253,250,246,0.1);
+  backdrop-filter:blur(12px);
+  padding:1.5rem;
+  margin-bottom:2px;
+  border-radius:2px;
+}
+.comp-titulo{
+  font-size:0.6rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--ouro);
+  margin-bottom:1.5rem;
+  font-weight:300;
+}
+.barra-item{margin-bottom:1.25rem}
+.barra-item:last-child{margin-bottom:0}
+.barra-label{
+  display:flex;
+  justify-content:space-between;
+  font-size:0.75rem;
+  color:var(--taupe);
+  margin-bottom:0.5rem;
+  font-weight:300;
+}
+.barra-label strong{color:var(--branco-quente);font-weight:400}
+.barra-trilha{height:2px;background:rgba(196,180,154,0.15);overflow:hidden}
+.barra-fill{height:100%;transition:width 0.9s ease}
+.barra-fill.seu{background:var(--ouro-claro)}
+.barra-fill.bench{background:var(--sage)}
 
 /* Potencial */
-.potencial-box{background:var(--areia-escura);border-left:3px solid var(--ouro);padding:1.25rem 1.5rem;margin-bottom:1.5rem}
-.potencial-box p{font-size:0.92rem;line-height:1.75;color:var(--texto)}
-.potencial-box strong{color:var(--verde)}
+.potencial-box{
+  background:rgba(168,137,90,0.07);
+  border:1px solid rgba(168,137,90,0.22);
+  border-left:2px solid var(--ouro);
+  padding:1.5rem;
+  margin-bottom:2px;
+  border-radius:2px;
+}
+.potencial-box p{
+  font-size:0.88rem;
+  line-height:1.9;
+  color:var(--taupe);
+  font-weight:300;
+}
+.potencial-box strong{color:var(--ouro-claro);font-weight:400}
 
-.btn-cta{width:100%;padding:1.2rem;background:var(--ouro);color:var(--texto);border:none;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:500;letter-spacing:0.04em;cursor:pointer;transition:opacity 0.2s}
-.btn-cta:hover{opacity:0.88}
+/* CTA */
+.btn-cta{
+  width:100%;
+  padding:1.2rem;
+  background:transparent;
+  color:var(--ouro-claro);
+  border:1px solid rgba(168,137,90,0.45);
+  font-family:'Poppins',sans-serif;
+  font-size:0.65rem;
+  font-weight:400;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:all 0.25s;
+  border-radius:2px;
+  margin-top:2px;
+}
+.btn-cta:hover{
+  background:rgba(168,137,90,0.1);
+  border-color:var(--ouro-claro);
+}
 
 /* Modal */
-.overlay{display:none;position:fixed;inset:0;background:rgba(30,26,22,0.82);z-index:1000;align-items:center;justify-content:center;padding:1.5rem}
+.overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(30,26,22,0.88);
+  z-index:1000;
+  align-items:center;
+  justify-content:center;
+  padding:1.5rem;
+  backdrop-filter:blur(6px);
+}
 .overlay.ativo{display:flex}
-.modal{background:var(--areia);max-width:440px;width:100%;padding:2.5rem;position:relative}
-.fechar{position:absolute;top:1rem;right:1.25rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--suave);line-height:1}
-.badge{display:inline-block;background:var(--vinho);color:white;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.3rem 0.75rem;margin-bottom:1rem}
-.modal h3{font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:500;color:var(--verde);line-height:1.2;margin-bottom:1rem}
-.modal p{font-size:0.88rem;color:var(--suave);line-height:1.7;margin-bottom:1.5rem}
-.btn-wpp{display:block;width:100%;padding:1.1rem;background:#25D366;color:white;border:none;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:500;cursor:pointer;text-decoration:none;text-align:center;transition:opacity 0.2s}
+
+.modal{
+  background:var(--espresso-soft);
+  border:1px solid rgba(168,137,90,0.28);
+  max-width:420px;
+  width:100%;
+  padding:2.5rem;
+  position:relative;
+  border-radius:2px;
+}
+.fechar{
+  position:absolute;
+  top:1rem;
+  right:1.25rem;
+  background:none;
+  border:none;
+  font-size:1.2rem;
+  cursor:pointer;
+  color:var(--taupe);
+  line-height:1;
+  transition:color 0.2s;
+}
+.fechar:hover{color:var(--branco-quente)}
+
+.modal-label{
+  font-size:0.6rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--ouro);
+  font-weight:300;
+  display:block;
+  margin-bottom:1rem;
+}
+.modal-divisor{
+  width:40px;
+  height:1px;
+  background:rgba(168,137,90,0.4);
+  margin-bottom:1.25rem;
+}
+.modal h3{
+  font-family:'Lora',serif;
+  font-style:italic;
+  font-size:1.5rem;
+  font-weight:400;
+  color:var(--branco-quente);
+  line-height:1.3;
+  margin-bottom:1rem;
+}
+.modal p{
+  font-size:0.85rem;
+  color:var(--taupe);
+  line-height:1.8;
+  margin-bottom:1.75rem;
+  font-weight:300;
+}
+
+.btn-wpp{
+  display:block;
+  width:100%;
+  padding:1.1rem;
+  background:#25D366;
+  color:var(--espresso);
+  border:none;
+  font-family:'Poppins',sans-serif;
+  font-size:0.65rem;
+  font-weight:400;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  cursor:pointer;
+  text-decoration:none;
+  text-align:center;
+  transition:opacity 0.2s;
+  border-radius:2px;
+}
 .btn-wpp:hover{opacity:0.9}
-.modal-nota{font-size:0.72rem;color:var(--suave);text-align:center;margin-top:0.75rem}
+
+.modal-nota{
+  font-size:0.68rem;
+  color:rgba(196,180,154,0.45);
+  text-align:center;
+  margin-top:0.85rem;
+  font-weight:300;
+  letter-spacing:0.04em;
+}
 
 @media(max-width:480px){
-  h1{font-size:1.8rem}
+  h1{font-size:1.9rem}
   .cards-top{grid-template-columns:1fr}
+  .container{padding:2.5rem 1.25rem 4rem}
+  .topo{padding:1.75rem 1.5rem 1.25rem}
 }
 </style>
 </head>
@@ -120,10 +508,12 @@ h2{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:500;color
 
 <header class="topo">
   <p class="topo-nome">Mari Manfredinny</p>
+  <div class="topo-divisor"></div>
+  <p class="topo-cargo">Diretora de Marketing Fracionada</p>
 </header>
 
 <div class="container">
-  <h1>O que o seu investimento em tráfego está gerando, de verdade?</h1>
+  <h1>O que o seu investimento em tráfego está <em>gerando, de verdade?</em></h1>
   <p class="sub">Calcule o seu Custo de Aquisição de Cliente e compare com o benchmark saudável para o seu segmento.</p>
 
   <div class="grupo">
@@ -137,7 +527,6 @@ h2{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:500;color
   <div class="grupo">
     <label>Clientes fechados por mês (média)</label>
     <div class="campo-wrap">
-      <span class="prefixo" style="font-size:0.85rem;color:var(--suave)"></span>
       <input type="number" id="clientes" placeholder="0" min="1" style="padding-left:0">
     </div>
   </div>
@@ -160,11 +549,12 @@ h2{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:500;color
   </div>
 
   <button class="btn-calcular" onclick="calcular()">Calcular meu CAC</button>
-  <p class="aviso">Os benchmarks são baseados em médias de mercado. Cada negócio tem suas próprias variáveis.</p>
+  <p class="aviso">Benchmarks baseados em médias de mercado. Cada negócio tem suas próprias variáveis.</p>
 
   <div class="resultados" id="resultados">
     <div class="divisor"></div>
     <h2>Diagnóstico do seu CAC</h2>
+    <span class="h2-label">Análise de performance</span>
 
     <div class="cards-top">
       <div class="card destaque">
@@ -216,7 +606,8 @@ h2{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:500;color
 <div class="overlay" id="overlay" onclick="fecharSeClicouFora(event)">
   <div class="modal">
     <button class="fechar" onclick="fecharModal()">&#215;</button>
-    <span class="badge">Diagnóstico gratuito</span>
+    <span class="modal-label">Diagnóstico gratuito</span>
+    <div class="modal-divisor"></div>
     <h3>Seu investimento pode render mais do que está rendendo agora</h3>
     <p>Em 20 minutos você entende onde o seu CAC está sendo impactado e o que pode ser ajustado para o mesmo budget gerar mais clientes.</p>
     <a class="btn-wpp" id="link-wpp" href="#" target="_blank" rel="noopener" onclick="rastrearCTA()">Falar com a Mari no WhatsApp</a>
@@ -225,8 +616,6 @@ h2{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:500;color
 </div>
 
 <script>
-// *** SUBSTITUA pelo seu número com DDI+DDD, sem espaços ou traços ***
-// Exemplo: '5524999990000'
 var NUM = 'SEU_NUMERO';
 var MSG = encodeURIComponent('Oi, Mari! Calculei meu CAC aqui e quero entender como melhorar.');
 document.getElementById('link-wpp').href = 'https://wa.me/' + NUM + '?text=' + MSG;
@@ -261,12 +650,10 @@ function calcular(){
   document.getElementById('label-bench').textContent = brl(b.ideal);
   document.getElementById('label-cac').textContent = brl(cac);
 
-  // Barras visuais
   var maiorValor = Math.max(cac, b.ideal) * 1.2;
   document.getElementById('barra-bench').style.width = Math.min(100, (b.ideal / maiorValor) * 100) + '%';
   document.getElementById('barra-seu').style.width = Math.min(100, (cac / maiorValor) * 100) + '%';
 
-  // Status
   var box = document.getElementById('status-box');
   var icone = document.getElementById('status-icone');
   var titulo = document.getElementById('status-titulo');
@@ -290,7 +677,6 @@ function calcular(){
     desc.textContent = 'Com esse CAC, cada cliente adquirido compromete uma fatia relevante da sua margem. Isso precisa de revisão estratégica urgente.';
   }
 
-  // Texto do potencial
   var dif = potencial - cli;
   var textoPot = 'Com o mesmo investimento de <strong>' + brl(inv) + '/mês</strong>, um CAC calibrado para o benchmark do segmento colocaria <strong>' + potencial + ' clientes/mês</strong> dentro do negócio.';
   if(dif > 0){
