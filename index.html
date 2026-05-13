@@ -60,7 +60,6 @@ body{
   font-weight:300;
 }
 
-/* Header */
 .topo{
   padding:2rem 2rem 1.5rem;
   text-align:center;
@@ -88,10 +87,8 @@ body{
   font-weight:300;
 }
 
-/* Layout */
 .container{max-width:640px;margin:0 auto;padding:3.5rem 1.5rem 5rem}
 
-/* Headline */
 h1{
   font-family:'Lora',serif;
   font-style:italic;
@@ -111,7 +108,6 @@ h1 em{color:var(--ouro-claro);font-style:italic}
   font-weight:300;
 }
 
-/* Inputs */
 .grupo{margin-bottom:2.25rem}
 
 label{
@@ -191,7 +187,6 @@ select option{background:var(--espresso-soft);color:var(--branco-quente)}
   pointer-events:none;
 }
 
-/* Botão calcular */
 .btn-calcular{
   width:100%;
   padding:1.15rem;
@@ -219,7 +214,6 @@ select option{background:var(--espresso-soft);color:var(--branco-quente)}
   letter-spacing:0.03em;
 }
 
-/* Divisor */
 .divisor{
   width:60px;
   height:1px;
@@ -227,7 +221,6 @@ select option{background:var(--espresso-soft);color:var(--branco-quente)}
   margin:3rem 0;
 }
 
-/* Resultados */
 .resultados{display:none}
 .resultados.ativo{display:block}
 
@@ -249,7 +242,6 @@ h2{
   font-weight:300;
 }
 
-/* Cards — vidro dourado */
 .cards-top{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:2px}
 
 .card{
@@ -288,7 +280,6 @@ h2{
   font-weight:300;
 }
 
-/* Status box */
 .status-box{
   padding:1.5rem;
   margin-top:2px;
@@ -343,7 +334,6 @@ h2{
   font-weight:300;
 }
 
-/* Comparativo visual — vidro claro */
 .comparativo{
   background:rgba(253,250,246,0.04);
   border:1px solid rgba(253,250,246,0.1);
@@ -376,7 +366,6 @@ h2{
 .barra-fill.seu{background:var(--ouro-claro)}
 .barra-fill.bench{background:var(--sage)}
 
-/* Potencial */
 .potencial-box{
   background:rgba(168,137,90,0.07);
   border:1px solid rgba(168,137,90,0.22);
@@ -393,7 +382,6 @@ h2{
 }
 .potencial-box strong{color:var(--ouro-claro);font-weight:400}
 
-/* CTA */
 .btn-cta{
   width:100%;
   padding:1.2rem;
@@ -415,7 +403,6 @@ h2{
   border-color:var(--ouro-claro);
 }
 
-/* Modal */
 .overlay{
   display:none;
   position:fixed;
@@ -644,9 +631,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <script>
-var NUM = 'SEU_NUMERO';
+var NUM = '5532999644209';
 var MSG = encodeURIComponent('Oi, Mari! Calculei meu CAC aqui e quero entender como melhorar.');
 document.getElementById('link-wpp').href = 'https://wa.me/' + NUM + '?text=' + MSG;
+
+function enviarCAPI(eventName, customData) {
+  fetch('/api/conversion', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({event_name: eventName, custom_data: customData || {}})
+  }).catch(function(){});
+}
 
 var benchmarks = {
   arquiteto:     {label:'Arquiteto',                min:300,  max:800,  ideal:500},
@@ -725,6 +720,7 @@ function calcular(){
 
   if(typeof fbq!=='undefined'){fbq('track','Lead',{value:inv,currency:'BRL'});}
   if(typeof gtag!=='undefined'){gtag('event','calcular_cac',{segmento:seg,investimento:inv});}
+  enviarCAPI('Lead',{value:inv,currency:'BRL',content_category:seg});
 }
 
 function abrirModal(){document.getElementById('overlay').classList.add('ativo');}
@@ -733,6 +729,7 @@ function fecharSeClicouFora(e){if(e.target===document.getElementById('overlay'))
 function rastrearCTA(){
   if(typeof fbq!=='undefined'){fbq('track','Contact');}
   if(typeof gtag!=='undefined'){gtag('event','click_whatsapp');}
+  enviarCAPI('Contact');
 }
 </script>
 </body>
