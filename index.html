@@ -509,7 +509,7 @@ h2{
 <header class="topo">
   <p class="topo-nome">Mari Manfredinny</p>
   <div class="topo-divisor"></div>
-  <p class="topo-cargo">Diretora de Marketing Fracionada</p>
+  <p class="topo-cargo">Tráfego pago | CRM | Estratégia de midias digitais | IA</p>
 </header>
 
 <div class="container">
@@ -536,9 +536,16 @@ h2{
     <div class="select-wrap">
       <select id="segmento">
         <option value="" disabled selected>Selecione</option>
+        <option value="arquiteto">Arquiteto</option>
+        <option value="advogado">Advogado</option>
+        <option value="medico">Médico</option>
+        <option value="dentista">Dentista</option>
+        <option value="harmonizacao">Harmonização Orofacial</option>
+        <option value="imoveis">Imobiliária e Corretores</option>
+        <option value="saude">Serviços B2C</option>
+        <option value="dermato">Dermatologista</option>
+        <option value="gineco">Ginecologista</option>
         <option value="b2b">Serviços B2B</option>
-        <option value="saude">Saúde e Estética</option>
-        <option value="imoveis">Imóveis</option>
         <option value="educacao">Educação</option>
         <option value="ecommerce">E-commerce / Produto físico</option>
         <option value="infoproduto">Infoprodutos / Digital</option>
@@ -611,7 +618,7 @@ h2{
     <h3>Seu investimento pode render mais do que está rendendo agora</h3>
     <p>Em 20 minutos você entende onde o seu CAC está sendo impactado e o que pode ser ajustado para o mesmo budget gerar mais clientes.</p>
     <a class="btn-wpp" id="link-wpp" href="#" target="_blank" rel="noopener" onclick="rastrearCTA()">Falar com a Mari no WhatsApp</a>
-    <p class="modal-nota">Reunião de 20 minutos. Sem compromisso.</p>
+    <p class="modal-nota">Reunião de 20 minutos.</p>
   </div>
 </div>
 
@@ -621,13 +628,20 @@ var MSG = encodeURIComponent('Oi, Mari! Calculei meu CAC aqui e quero entender c
 document.getElementById('link-wpp').href = 'https://wa.me/' + NUM + '?text=' + MSG;
 
 var benchmarks = {
-  b2b:        {label:'Serviços B2B',      min:200,  max:600,  ideal:380},
-  saude:      {label:'Saúde e Estética',  min:80,   max:220,  ideal:140},
-  imoveis:    {label:'Imóveis',           min:800,  max:2000, ideal:1300},
-  educacao:   {label:'Educação',          min:150,  max:400,  ideal:260},
-  ecommerce:  {label:'E-commerce',        min:50,   max:160,  ideal:100},
-  infoproduto:{label:'Infoprodutos',      min:25,   max:100,  ideal:60},
-  outro:      {label:'Outro',             min:100,  max:320,  ideal:200}
+  arquiteto:     {label:'Arquiteto',                min:300,  max:800,  ideal:500},
+  advogado:      {label:'Advogado',                 min:250,  max:700,  ideal:450},
+  medico:        {label:'Médico',                   min:150,  max:400,  ideal:260},
+  dentista:      {label:'Dentista',                 min:120,  max:350,  ideal:220},
+  harmonizacao:  {label:'Harmonização Orofacial',   min:100,  max:280,  ideal:180},
+  imoveis:       {label:'Imobiliária e Corretores', min:800,  max:2000, ideal:1300},
+  saude:         {label:'Serviços B2C',             min:80,   max:220,  ideal:140},
+  dermato:       {label:'Dermatologista',           min:120,  max:320,  ideal:200},
+  gineco:        {label:'Ginecologista',            min:150,  max:380,  ideal:240},
+  b2b:           {label:'Serviços B2B',             min:200,  max:600,  ideal:380},
+  educacao:      {label:'Educação',                 min:150,  max:400,  ideal:260},
+  ecommerce:     {label:'E-commerce',               min:50,   max:160,  ideal:100},
+  infoproduto:   {label:'Infoprodutos',             min:25,   max:100,  ideal:60},
+  outro:         {label:'Outro',                    min:100,  max:320,  ideal:200}
 };
 
 function brl(v){return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0})}
