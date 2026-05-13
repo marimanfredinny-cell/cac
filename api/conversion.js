@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();
 
-  const { event_name, custom_data, user_data } = req.body;
+  const { event_name, custom_data, user_data, test_event_code } = req.body;
   const token = process.env.META_CAPI_TOKEN;
   const pixelId = '1348713502744731';
 
@@ -12,11 +12,13 @@ export default async function handler(req, res) {
       event_name,
       event_time: Math.floor(Date.now() / 1000),
       action_source: 'website',
-      event_source_url: req.headers.referer || 'https://cac.marimanfredinny.com.br',
+      event_source_url: req.headers.referer || 'https://cac.marimanfredinny.com',
       user_data: user_data || { client_ip_address: req.headers['x-forwarded-for'] || req.socket.remoteAddress },
       custom_data: custom_data || {}
     }]
   };
+
+  if (test_event_code) payload.test_event_code = test_event_code;
 
   try {
     const response = await fetch(
