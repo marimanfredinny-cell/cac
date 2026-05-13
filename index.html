@@ -509,7 +509,7 @@ h2{
 <header class="topo">
   <p class="topo-nome">Mari Manfredinny</p>
   <div class="topo-divisor"></div>
-  <p class="topo-cargo">Diretora de Marketing Fracionada</p>
+  <p class="topo-cargo">Tráfego pago &nbsp;|&nbsp; CRM &nbsp;|&nbsp; Estratégia de mídias digitais &nbsp;|&nbsp; IA</p>
 </header>
 
 <div class="container">
@@ -536,12 +536,15 @@ h2{
     <div class="select-wrap">
       <select id="segmento">
         <option value="" disabled selected>Selecione</option>
-        <option value="b2b">Serviços B2B</option>
-        <option value="saude">Saúde e Estética</option>
-        <option value="imoveis">Imóveis</option>
-        <option value="educacao">Educação</option>
-        <option value="ecommerce">E-commerce / Produto físico</option>
-        <option value="infoproduto">Infoprodutos / Digital</option>
+        <option value="arquiteto">Arquiteto</option>
+        <option value="advogado">Advogado</option>
+        <option value="medico">Médico</option>
+        <option value="dentista">Dentista</option>
+        <option value="dermato">Dermatologista</option>
+        <option value="gineco">Ginecologista</option>
+        <option value="hof">HOF (High-ticket Online)</option>
+        <option value="imobiliaria">Imobiliária e Corretores</option>
+        <option value="b2c">Serviços B2C</option>
         <option value="outro">Outro</option>
       </select>
       <span class="select-seta">&#9660;</span>
@@ -621,13 +624,16 @@ var MSG = encodeURIComponent('Oi, Mari! Calculei meu CAC aqui e quero entender c
 document.getElementById('link-wpp').href = 'https://wa.me/' + NUM + '?text=' + MSG;
 
 var benchmarks = {
-  b2b:        {label:'Serviços B2B',      min:200,  max:600,  ideal:380},
-  saude:      {label:'Saúde e Estética',  min:80,   max:220,  ideal:140},
-  imoveis:    {label:'Imóveis',           min:800,  max:2000, ideal:1300},
-  educacao:   {label:'Educação',          min:150,  max:400,  ideal:260},
-  ecommerce:  {label:'E-commerce',        min:50,   max:160,  ideal:100},
-  infoproduto:{label:'Infoprodutos',      min:25,   max:100,  ideal:60},
-  outro:      {label:'Outro',             min:100,  max:320,  ideal:200}
+  arquiteto:  {label:'Arquiteto',               min:150,  max:500,  ideal:300},
+  advogado:   {label:'Advogado',                min:200,  max:600,  ideal:380},
+  medico:     {label:'Médico',                  min:80,   max:250,  ideal:150},
+  dentista:   {label:'Dentista',                min:80,   max:220,  ideal:140},
+  dermato:    {label:'Dermatologista',          min:90,   max:260,  ideal:160},
+  gineco:     {label:'Ginecologista',           min:90,   max:240,  ideal:150},
+  hof:        {label:'HOF (High-ticket Online)',min:300,  max:900,  ideal:550},
+  imobiliaria:{label:'Imobiliária e Corretores',min:800,  max:2000, ideal:1300},
+  b2c:        {label:'Serviços B2C',            min:60,   max:200,  ideal:120},
+  outro:      {label:'Outro',                   min:100,  max:320,  ideal:200}
 };
 
 function brl(v){return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0})}
